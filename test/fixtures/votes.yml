@@ -3,11 +3,9 @@
 one:
   poll: one
   option: MyString
-  amount: 
-  amount: 
+  amount: 9.99
 
 two:
   poll: two
   option: MyString
-  amount: 
-  amount: 
+  amount: 9.99

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_002144) do
+ActiveRecord::Schema.define(version: 2020_06_19_005004) do
+
+  create_table "polls", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.text "question"
+    t.text "options"
+    t.string "taddr"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_polls_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -23,4 +33,15 @@ ActiveRecord::Schema.define(version: 2020_06_19_002144) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.integer "poll_id", null: false
+    t.string "option"
+    t.decimal "amount", precision: 13, scale: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["poll_id"], name: "index_votes_on_poll_id"
+  end
+
+  add_foreign_key "polls", "users"
+  add_foreign_key "votes", "polls"
 end
