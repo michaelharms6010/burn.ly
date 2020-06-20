@@ -1,6 +1,7 @@
 require "json"
 
 class PollsController < ApplicationController
+    helper VotesHelper
     def show
         @poll = Poll.find(params[:id])
     end
