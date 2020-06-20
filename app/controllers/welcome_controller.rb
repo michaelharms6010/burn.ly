@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
+    helper VotesHelper
     def show
-        `zecwallet-cli.exe list`
+       
     end
 end
