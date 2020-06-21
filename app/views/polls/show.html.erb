@@ -2,9 +2,11 @@
 <h5>Posted by <%= @user.email %></h5>
 <ul>
     <% @poll.options.split(",").each do |option| %>
-        <li><%= option.split(":^:")[0] %></li>
+        <li><strong><%= option.split(":^:")[0] %></strong> : Vote to: <%= option.split(":^:")[1] %> </li>
     <% end %>
     </ul>
 <hr>
-<%= link_to "Delete", poll_path(@poll), method: :delete, data: {confirm: "Are you sure?"}, :class => "btn btn-danger" %>
+<% if current_user.id == @poll.user_id %>
+    <%= link_to "Delete", poll_path(@poll), method: :delete, data: {confirm: "Are you sure?"}, :class => "btn btn-danger" %>
+<% end %>
 <hr>

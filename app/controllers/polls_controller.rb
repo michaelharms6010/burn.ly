@@ -20,9 +20,7 @@ class PollsController < ApplicationController
         @poll.options = @poll.options.split(",").map do |option|
             option = option.strip
             option += ":^:" + random_burner_taddr()
-        end
-        @poll.options = JSON.parse(@poll.options).join(",")
-        # get taddr here?
+        end.join(",")
         if(@poll.save)
             redirect_to @poll
         else
