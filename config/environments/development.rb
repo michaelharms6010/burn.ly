@@ -63,20 +63,20 @@ Rails.application.configure do
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
 
-  Thread.new do
-    loop do
-      sleep 5
-      x = Poll.all
-      addrs = []
-      x.each do |poll|
-        poll.options.split(",").each do |option|
-          addrs.push(option.split(":^:"))
-        end
-      end
-      blockinfo = HTTP.get("https://api.zcha.in/v2/mainnet/accounts/#{addrs[-1]}")
-      puts JSON.parse(blockinfo)["balance"].to_s
-    end
-  end
+  # Thread.new do
+  #   loop do
+  #     sleep 5
+  #     x = Poll.all
+  #     addrs = []
+  #     x.each do |poll|
+  #       poll.options.split(",").each do |option|
+  #         addrs.push(option.split(":^:"))
+  #       end
+  #     end
+  #     blockinfo = HTTP.get("https://api.zcha.in/v2/mainnet/accounts/#{addrs[-1]}")
+  #     puts JSON.parse(blockinfo)["balance"].to_s
+  #   end
+  # end
 
 
 

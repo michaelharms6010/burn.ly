@@ -1,14 +1,18 @@
 require "json"
+require "http"
 
 class PollsController < ApplicationController
     helper VotesHelper
-    update_votes();
     def index
         @polls = Poll.all
     end
     def show
         @poll = Poll.find(params[:id])
         @user = User.find(@poll.user_id)
+        @poll.options = @poll.options.split(",").map do |option|
+            addr = option.split(":^:")[1]
+            option += ":^:" + JSON.parse(HTTP.get("https://api.zcha.in/v2/mainnet/accounts/#{addr}"))["balance"].to_s
+        end.join(",")
     end
 
     def new
