@@ -7,6 +7,7 @@ class PollsController < ApplicationController
     end
     def show
         @poll = Poll.find(params[:id])
+        @user = User.find(@poll.user_id)
     end
 
     def new
@@ -16,10 +17,11 @@ class PollsController < ApplicationController
     def create
         @poll = Poll.new(poll_params)
         @poll.user_id = current_user.id
-        @poll.options.split(",").each do |option|
+        @poll.options = @poll.options.split(",").map do |option|
             option = option.strip
-            puts random_burner_taddr()
+            option += ":^:" + random_burner_taddr()
         end
+        @poll.options = JSON.parse(@poll.options).join(",")
         # get taddr here?
         if(@poll.save)
             redirect_to @poll

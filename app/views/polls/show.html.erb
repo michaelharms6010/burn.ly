@@ -1,7 +1,8 @@
 <h2><%= @poll.question %></h2>
+<h5>Posted by <%= @user.email %></h5>
 <ul>
     <% @poll.options.split(",").each do |option| %>
-        <li><%= option %></li>
+        <li><%= option.split(":^:")[0] %></li>
     <% end %>
     </ul>
 <hr>

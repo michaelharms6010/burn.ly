@@ -3,8 +3,8 @@
     <div class="well">
         <h3><%= poll.question %></h3>
         <ul>
-        <%= poll.options.split(",").each do |option| %>
-            <li><%= option %></li>
+        <% poll.options.split(",").each do |option| %>
+            <li><strong><%= option.split(":^:")[0] %></strong> : Vote to: <%= option.split(":^:")[1] %> </li>
         <% end %>
         </ul>
         <%= link_to "Details", poll_path(poll), :class => "btn btn-primary" %>

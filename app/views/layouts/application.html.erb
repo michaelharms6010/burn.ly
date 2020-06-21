@@ -10,6 +10,7 @@
   </head>
 
   <body>
+  <div class="container">
   <header>
     <% if signed_in? %>
       Signed in as: <%= current_user.email %>
@@ -22,6 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav">
         <li><%= link_to "Home", home_path %></li>
+        <li><%= link_to "View Polls", polls_path %></li>
         <% if signed_in? %>
           <li><%= link_to "Create Post", new_poll_path %></li>
         <% end %>
@@ -34,8 +36,8 @@
         <% flash.each do |key, value| %>
           <div class="flash <%= key %>"><%= value %></div>
         <% end %>
-      <div>
       <%= yield %>
     </section>
+  </div>
   </body>
 </html>
