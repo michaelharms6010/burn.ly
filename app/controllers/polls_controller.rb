@@ -2,6 +2,9 @@ require "json"
 
 class PollsController < ApplicationController
     helper VotesHelper
+    def index
+        @polls = Poll.all
+    end
     def show
         @poll = Poll.find(params[:id])
     end
@@ -12,6 +15,11 @@ class PollsController < ApplicationController
 
     def create
         @poll = Poll.new(poll_params)
+        @poll.user_id = current_user.id
+        @poll.options.split(",").each do |option|
+            option = option.strip
+            puts random_burner_taddr()
+        end
         # get taddr here?
         if(@poll.save)
             redirect_to @poll
@@ -30,4 +38,15 @@ class PollsController < ApplicationController
     private def poll_params
         params.require(:poll).permit(:question, :options, :taddr)
     end
+
+    private def random_burner_taddr()
+        head = "t1"
+        middle = "burnvotertaddrxdlmaoepic"
+        tail = [*("A"),*('C'..'H'),*("J".."N"),*("P".."Z"), *("a"),*('c'..'h'),*("j".."n"),*("p".."z"),*('0'),*("2".."9")].shuffle[0,9].join
+        
+        taddr = (head + middle + tail)
+        return taddr if taddr.length == 35
+        "Invalid taddr generated"
+    end
+
 end

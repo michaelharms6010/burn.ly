@@ -1,0 +1,21 @@
+<h1>Add Poll</h1>
+<%= form_for :poll, url: polls_path do |f| %>
+    <%if @poll.errors.any? %>
+        <% @poll.errors.full_messages.each do |msg| %>
+            <div class="alert alert-danger"><%= msg %></div>
+        <% end %>
+    <% end %>
+    <p>
+        <%= f.label :question %><br>
+        <%=f.text_field(:question, {:class => "form-control"}) %>
+    </p>
+
+    <p>
+        <%= f.label :options %><br>
+        <%=f.text_area(:options, {:class => "form-control"}) %>
+    </p>
+
+    <p>
+        <%= f.submit({:class => "btn btn-primary"}) %>
+    </p>
+<% end %>

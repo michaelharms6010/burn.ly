@@ -4,7 +4,7 @@
     <title>Burnvote</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -18,13 +18,23 @@
       <%= link_to 'Sign in', sign_in_path %>
     <% end %>
   </header>
-
+  <nav class="navbar navbar-expand-md navbar-light bg-dark">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav">
+        <li><%= link_to "Home", home_path %></li>
+        <% if signed_in? %>
+          <li><%= link_to "Create Post", new_poll_path %></li>
+        <% end %>
+      </ul>
+      </ul>
     </div>
+  </nav>
     <section>
       <div id="flash">
         <% flash.each do |key, value| %>
           <div class="flash <%= key %>"><%= value %></div>
         <% end %>
+      <div>
       <%= yield %>
     </section>
   </body>

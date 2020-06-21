@@ -1,0 +1,9 @@
+<h2><%= @poll.question %></h2>
+<ul>
+    <% @poll.options.split(",").each do |option| %>
+        <li><%= option %></li>
+    <% end %>
+    </ul>
+<hr>
+<%= link_to "Delete", poll_path(@poll), method: :delete, data: {confirm: "Are you sure?"}, :class => "btn btn-danger" %>
+<hr>
