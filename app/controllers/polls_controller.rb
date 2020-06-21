@@ -2,6 +2,7 @@ require "json"
 
 class PollsController < ApplicationController
     helper VotesHelper
+    update_votes();
     def index
         @polls = Poll.all
     end
@@ -37,6 +38,10 @@ class PollsController < ApplicationController
 
     private def poll_params
         params.require(:poll).permit(:question, :options, :taddr)
+    end
+
+    private def update_votes()
+        #Get each address total and update amounts
     end
 
     private def random_burner_taddr()
