@@ -24,6 +24,7 @@ class PollsController < ApplicationController
         @poll.user_id = current_user.id
         @poll.options = @poll.options.split(",").map do |option|
             option = option.strip
+            # Option.create(text: option, poll_id: @poll.id, taddr: random_burner_taddr())
             option += ":^:" + random_burner_taddr()
         end.join(",")
         if(@poll.save)
